@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Delish Bites Restaurant</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: #000000;
+      color: #fff;
+      line-height: 1.6;
+      padding: 0 20px;
+    }
+
+    header {
+      background: url('https://source.unsplash.com/1600x400/?restaurant,food') no-repeat center center/cover;
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 30px 0 20px;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      background: #ff8c00;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: #d35400;
+    }
+
+    .menu-table {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #202020;
+    }
+
+    @media (max-width: 600px) {
+      .menu-table, th, td {
+        font-size: 14px;
+      }
+
+      header h1 {
+        font-size: 32px;
+      }
+
+      .tab-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>The आरा JUNCTION RESTAURANT</h1>
+    <p>Fresh. Local. Delicious.</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showMenu('starters', this)">Starters</button>
+    <button class="tab-btn" onclick="showMenu('main', this)">Main Course</button>
+    <button class="tab-btn" onclick="showMenu('desserts', this)">Desserts</button>
+    <button class="tab-btn" onclick="showMenu('drinks', this)">Drinks</button>
+  </div>
+
+  <table class="menu-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody id="menu-body">
+      <!-- Dynamic content goes here -->
+    </tbody>
+  </table>
+
+  <script>
+    const menu = {
+      starters: [
+        { item: "Paneer Tikka", desc: "Grilled marinated paneer cubes", price: "₹200" },
+        { item: "Veg Spring Rolls", desc: "Crispy vegetable rolls with dip", price: "₹150" },
+        { item: "Tomato Soup", desc: "Creamy tomato basil soup", price: "₹120" },
+        {item:'Paneer Chilli Dry',price:'₹260'},{item:'Mashroom Chilli Dry',price:'₹295'},
+        {item:'Baby Corn Crispy',price:'₹325'},{item:'Mint Mojito',price:'₹160'},
+        {item:'Mint Mojito',price:'₹160'},{item:'Mint Mojito',price:'₹160'},
+        {item:'Mint Mojito',price:'₹160'},{item:'Mint Mojito',price:'₹160'},
+      ],
+      main: [
+        { item: "Butter Chicken", desc: "Rich tomato-based creamy chicken curry", price: "₹320" },
+        { item: "Paneer Butter Masala", desc: "Spicy cottage cheese in buttery gravy", price: "₹280" },
+        { item: "Dal Tadka", desc: "Yellow lentils with Indian spices", price: "₹180" }
+      ],
+      desserts: [
+        { item: "Gulab Jamun", desc: "Warm sweet milk dumplings", price: "₹90" },
+        { item: "Rasgulla", desc: "Syrupy spongy sweet balls", price: "₹80" },
+        { item: "Ice Cream", desc: "Vanilla or chocolate scoop", price: "₹70" }
+      ],
+      drinks: [
+        { item: "Masala Chai", desc: "Indian spiced tea", price: "₹40" },
+        { item: "Lassi", desc: "Sweet yogurt drink", price: "₹60" },
+        { item: "Cold Coffee", desc: "Chilled coffee with milk", price: "₹80" },
+        {item:'Mint Mojito',price:'₹160'},{item:'Green Mint Mojito',price:'₹160'},
+        {item:'Fresh Mint Cooler',price:'₹160'},{item:'Pona Colada',price:'₹180'},
+        {item:'Fruit Punch',price:'₹180'},{item:'Mint Mojito',price:'₹160'},
+        {item:'Mint Mojito',price:'₹160'},{item:'Mint Mojito',price:'₹160'},
+      ]
+    };
+
+    function showMenu(category, button) {
+      const menuBody = document.getElementById('menu-body');
+      menuBody.innerHTML = '';
+
+      menu[category].forEach(dish => {
+        const row = `<tr>
+                      <td>${dish.item}</td>
+                      <td>${dish.price}</td>
+                    </tr>`;
+        menuBody.innerHTML += row;
+      });
+
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+    }
+
+    // Show default menu on load
+    window.onload = () => showMenu('starters', document.querySelector('.tab-btn'));
+  </script>
+
+</body>
+</html>
